@@ -7,7 +7,7 @@ resource "aws_instance" "ec2" {
   instance_type = "t2.micro"
   subnet_id     = "subnet-fd0257b1"
   key_name      = "awskey"
-  vpc_security_group_ids = [aws_security_group.tf-sg-demo.id]
+  vpc_security_group_ids = [aws_security_group.tf-sg-demo1.id]
   user_data =  <<-EOF
                  #! /bin/bash
                  yum update -y
@@ -18,8 +18,8 @@ resource "aws_instance" "ec2" {
                  EOF
 }
 
-resource "aws_security_group" "tf-sg-demo" {
-  name = "tf-sg-demo"
+resource "aws_security_group" "tf-sg-demo1" {
+  name = "tf-sg-demo1"
 }
 
 
@@ -29,7 +29,7 @@ resource "aws_security_group_rule" "allow-http" {
   to_port     = "80"
   cidr_blocks = ["0.0.0.0/0"]
   protocol    = "TCP"
-  security_group_id = aws_security_group.tf-sg-demo.id  
+  security_group_id = aws_security_group.tf-sg-demo1.id  
 }
 
 
@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "allow-all"{
     to_port = 0
     cidr_blocks = ["0.0.0.0/0"]
     protocol = "-1"
-    security_group_id = aws_security_group.tf-sg-demo.id
+    security_group_id = aws_security_group.tf-sg-demo1.id
 }
 
 
@@ -49,7 +49,7 @@ resource "aws_security_group_rule" "allow-ssh"{
     to_port = "22"
     protocol = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
-    security_group_id = aws_security_group.tf-sg-demo.id
+    security_group_id = aws_security_group.tf-sg-demo1.id
 }
 
 
